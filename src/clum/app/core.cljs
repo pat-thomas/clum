@@ -5,11 +5,16 @@
 
 (def app-state (r/atom {}))
 
+(defn button
+  []
+  [:div.app-button {:on-click #(println "hello")}])
+
 (defn main-component
   []
   [:div#container
    [:div.button-row
-    [:div.app-button]]])
+    (button)
+    (button)]])
 
 (defn render-app
   []

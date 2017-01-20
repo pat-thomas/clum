@@ -55309,9 +55309,13 @@ goog.require("cljs.core");
 goog.require("reagent.core");
 cljs.core.enable_console_print_BANG_.call(null);
 clum.app.core.app_state = reagent.core.atom.call(null, cljs.core.PersistentArrayMap.EMPTY);
+clum.app.core.button = function clum$app$core$button() {
+  return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div.app-button", "div.app-button", 355286449), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "on-click", "on-click", 1632826543), function() {
+    return cljs.core.println.call(null, "hello");
+  }], null)], null);
+};
 clum.app.core.main_component = function clum$app$core$main_component() {
-  return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div#container", "div#container", -1257349488), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div.button-row", "div.button-row", -1099663603), new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div.app-button", "div.app-button", 355286449)], null)], null)], 
-  null);
+  return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div#container", "div#container", -1257349488), new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div.button-row", "div.button-row", -1099663603), clum.app.core.button.call(null), clum.app.core.button.call(null)], null)], null);
 };
 clum.app.core.render_app = function clum$app$core$render_app() {
   return reagent.core.render.call(null, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [clum.app.core.main_component], null), document.getElementById("app"));
