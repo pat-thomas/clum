@@ -8,5 +8,10 @@
                         :compiler     {:output-to "public/js/app.js"
                                        :optimizations :whitespace
                                        :pretty-print  true}}]}
-  :dependencies [[org.clojure/clojure "1.8.0"]
-                 [reagent             "0.6.0"]])
+  :dependencies [;; server-side
+                 [org.clojure/clojure "1.8.0"]
+                 [http-kit            "2.2.0"]
+
+                 ;; client-side
+                 [reagent                    "0.6.0"]
+                 [com.cognitect/transit-cljs "0.8.239"]])
