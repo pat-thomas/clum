@@ -15,10 +15,10 @@
   (let [value (r/atom nil)]
     (fn []
       [:input.form-control
-       {:type :text
+       {:type        :text
         :placeholder "type in a message and press enter!"
-        :value @value
-        :on-change #(reset! value (-> % .-target .-value))
+        :value       @value
+        :on-change   #(reset! value (-> % .-target .-value))
         :on-key-down #(when (= (.-keyCode %) 13)
                         (ws/send-transit-msg! {:message @value})
                         (reset! value nil))}])))
