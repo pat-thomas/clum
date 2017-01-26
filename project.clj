@@ -12,11 +12,12 @@
   :auto {:default {:file-pattern #"\.(clj)$"}}
   :source-paths ["src/clum/server"]
   :dependencies [;; server-side
-                 [org.clojure/clojure "1.8.0"]
-                 [http-kit            "2.2.0"]
-                 [com.taoensso/timbre "4.8.0"]
+                 [org.clojure/clojure       "1.8.0"]
+                 [http-kit                  "2.2.0"]
+                 [com.taoensso/timbre       "4.8.0"]
                  [com.cognitect/transit-clj "0.8.297"]
                  [ring-transit              "0.1.6"]
+                 [overtone                  "0.10.1"]
 
                  ;; client-side
                  [reagent                    "0.6.0"]
