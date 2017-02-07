@@ -8,7 +8,8 @@
 
 (defn button
   []
-  [:div.app-button {:on-click #(println "hello")}])
+  [:div.app-button {:on-click (fn [evt]
+                                (ws/send-transit-msg! {:action "button-clicked"}))}])
 
 (defn message-input
   []

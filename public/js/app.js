@@ -59161,8 +59161,8 @@ goog.require("reagent.core");
 cljs.core.enable_console_print_BANG_.call(null);
 clum.app.core.app_state = reagent.core.atom.call(null, cljs.core.PersistentArrayMap.EMPTY);
 clum.app.core.button = function clum$app$core$button() {
-  return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div.app-button", "div.app-button", 355286449), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "on-click", "on-click", 1632826543), function() {
-    return cljs.core.println.call(null, "hello");
+  return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div.app-button", "div.app-button", 355286449), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "on-click", "on-click", 1632826543), function(evt) {
+    return clum.app.ws.send_transit_msg_BANG_.call(null, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "action", "action", -811238024), "button-clicked"], null));
   }], null)], null);
 };
 clum.app.core.message_input = function clum$app$core$message_input() {
@@ -59171,12 +59171,12 @@ clum.app.core.message_input = function clum$app$core$message_input() {
     return function() {
       return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "input.form-control", "input.form-control", -1123419636), new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null, "type", "type", 1174270348), new cljs.core.Keyword(null, "text", "text", -1790561697), new cljs.core.Keyword(null, "placeholder", "placeholder", -104873083), "type in a message and press enter!", new cljs.core.Keyword(null, "value", "value", 305978217), 
       cljs.core.deref.call(null, value), new cljs.core.Keyword(null, "on-change", "on-change", -732046149), function(value) {
-        return function(p1__7254_SHARP_) {
-          return cljs.core.reset_BANG_.call(null, value, p1__7254_SHARP_.target.value);
+        return function(p1__7270_SHARP_) {
+          return cljs.core.reset_BANG_.call(null, value, p1__7270_SHARP_.target.value);
         };
       }(value), new cljs.core.Keyword(null, "on-key-down", "on-key-down", -1374733765), function(value) {
-        return function(p1__7255_SHARP_) {
-          if (cljs.core._EQ_.call(null, p1__7255_SHARP_.keyCode, 13)) {
+        return function(p1__7271_SHARP_) {
+          if (cljs.core._EQ_.call(null, p1__7271_SHARP_.keyCode, 13)) {
             clum.app.ws.send_transit_msg_BANG_.call(null, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "message", "message", -406056002), cljs.core.deref.call(null, value)], null));
             return cljs.core.reset_BANG_.call(null, value, null);
           } else {
@@ -59194,10 +59194,10 @@ clum.app.core.activity_log_view = function clum$app$core$activity_log_view() {
 };
 clum.app.core.main_component = function clum$app$core$main_component() {
   return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div#container", "div#container", -1257349488), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div#buttons", "div#buttons", -1401601015), new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div.button-row", "div.button-row", -1099663603), clum.app.core.button.call(null), 
-  clum.app.core.button.call(null)], null)], null), new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [clum.app.core.message_input], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div#activity-log", "div#activity-log", -929667729), cljs.core.map.call(null, function(p__7258) {
-    var map__7259 = p__7258;
-    var map__7259__$1 = cljs.core.seq_QMARK_.call(null, map__7259) ? cljs.core.apply.call(null, cljs.core.hash_map, map__7259) : map__7259;
-    var message = cljs.core.get.call(null, map__7259__$1, new cljs.core.Keyword(null, "message", "message", -406056002));
+  clum.app.core.button.call(null)], null)], null), new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [clum.app.core.message_input], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div#activity-log", "div#activity-log", -929667729), cljs.core.map.call(null, function(p__7274) {
+    var map__7275 = p__7274;
+    var map__7275__$1 = cljs.core.seq_QMARK_.call(null, map__7275) ? cljs.core.apply.call(null, cljs.core.hash_map, map__7275) : map__7275;
+    var message = cljs.core.get.call(null, map__7275__$1, new cljs.core.Keyword(null, "message", "message", -406056002));
     return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "p", "p", 151049309), message], null);
   }, (new cljs.core.Keyword(null, "activity-log", "activity-log", 933554034)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, clum.app.core.app_state)))], null)], null);
 };
