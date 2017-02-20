@@ -10,10 +10,14 @@
   (fn [msg]
     (update-fn (->> msg .-data (t/read json-reader)))))
 
+(defn ->json
+  [thing]
+  (.stringify js/JSON (clj->js thing)))
+
 (defn send-transit-msg!
   [msg]
   (if @ws-chan
-    (let [serialized-msg (t/write json-writer msg)]
+    (let [serialized-msg (->json msg)]
       (println serialized-msg)
       (.send @ws-chan serialized-msg))
     (throw (js/Error. "Websocket is not available!"))))

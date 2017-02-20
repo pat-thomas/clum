@@ -23,6 +23,22 @@
     (doseq [ch @channels]
       (http/send! ch serialized false))))
 
+(defn play-animation
+  []
+  (loop [tick 0]
+    (when (< tick 8)
+      (log/infof "tick... %s" tick)
+      (notify-clients {:tick tick})
+      (Thread/sleep 500)
+      (recur (inc tick)))))
+
+(defn respond-msg
+  [msg]
+  (let [{:keys [action] :as parsed} (json/parse-string msg true)]
+    (if (= action "play-animation")
+      (play-animation)
+      (notify-clients {:highlighted (:data parsed)}))))
+
 (defn handle-socket-request
   [req]
   (log/infof "handle-socket-request: %s" req)
@@ -31,17 +47,8 @@
     (connect! channel)
     (swap! channels conj channel)
     (http/on-close channel #(partial disconnect! channel))
-
-    (loop [tick 0]
-      (when (< tick 8)
-        (log/infof "tick... %s" tick)
-        (notify-clients {:tick tick})
-        (Thread/sleep 500)
-        (recur (inc tick))))
-    
-    ;;(http/on-receive channel #(notify-clients %))
     (http/on-receive channel (fn [msg]
-                               (def msg msg)))))
+                               (respond-msg msg)))))
 
 (defn app-fn
   [{:keys [uri] :as req}]

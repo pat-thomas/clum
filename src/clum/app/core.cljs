@@ -8,18 +8,24 @@
 
 (defn button
   [x y]
-  (let [tick      (:tick @app-state)
-        btn-class (if (or (= tick x)
-                          (= tick y))
-                    :div.app-button-on
-                    :div.app-button)]
-    [btn-class {;;:data-x   x
-                ;;:data-y   y
-                :key (str "button." x "." y)
-                :on-click  (fn [evt]
-                             (ws/send-transit-msg! {:action "button-clicked"
-                                                    :data   {:x x
-                                                             :y y}}))}]))
+  (let [tick        (:tick @app-state)
+        highlighted (:highlighted @app-state)
+        btn-class   (cond (= highlighted
+                             {:x x :y y})
+                          :div.app-button-highlighted
+                          
+                          (or (= tick x)
+                              (= tick y))
+                          :div.app-button-on
+
+                          :else
+                          :div.app-button)]
+    [btn-class {:key      (str "button." x "." y)
+                :on-click (fn [evt]
+                            (ws/send-transit-msg! {:action "button-clicked"
+                                                   :type "broadcast"
+                                                   :data   {:x x
+                                                            :y y}}))}]))
 
 (defn message-input
   []
@@ -33,6 +39,13 @@
         :on-key-down #(when (= (.-keyCode %) 13)
                         (ws/send-transit-msg! {:message @value})
                         (reset! value nil))}])))
+
+(defn anim-button
+  []
+  [:input
+   {:type     :button
+    :value    "Play animation"
+    :on-click #(ws/send-transit-msg! {:action "play-animation"})}])
 
 (defn activity-log-view
   []
@@ -49,6 +62,7 @@
        (for [y (range 8)]
          (button x y))])]
    [message-input]
+   [anim-button]
    [:div#activity-log
     (map (fn [{:keys [message]}]
            [:p message])
@@ -60,14 +74,20 @@
             (.getElementById js/document "app")))
 
 (defn update-app-state-from-socket!
-  [{:strs [message tick] :as data}]
-  (if-not (empty? message)
+  [{:strs [message tick highlighted] :as data}]
+  (when-not (nil? tick)
+    (swap! app-state update-in [:tick] (fn [_]
+                                         tick)))
+  (when-not (nil? message)
     (swap! app-state update-in [:activity-log] (fn [activity-log]
                                                  (if (>= (count activity-log) 10)
                                                    (conj (drop-last activity-log) message)
-                                                   (conj activity-log             message))))
-    (swap! app-state update-in [:tick] (fn [_]
-                                         tick))))
+                                                   (conj activity-log             message)))))
+
+  (when-not (nil? highlighted)
+    (let [{:strs [x y]} highlighted]
+      (swap! app-state update-in [:highlighted] (fn [_]
+                                                  {:x x :y y})))))
 
 (defn main
   []
