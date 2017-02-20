@@ -49,7 +49,6 @@
 (defn handle-socket-request
   [req]
   (log/infof "handle-socket-request: %s" req)
-  (def req req)
   (http/with-channel req channel
     (connect! channel)
     (swap! channels conj channel)
