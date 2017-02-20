@@ -13,7 +13,9 @@
 (defn send-transit-msg!
   [msg]
   (if @ws-chan
-    (.send @ws-chan (t/write json-writer msg))
+    (let [serialized-msg (t/write json-writer msg)]
+      (println serialized-msg)
+      (.send @ws-chan serialized-msg))
     (throw (js/Error. "Websocket is not available!"))))
 
 (defn make-websocket!

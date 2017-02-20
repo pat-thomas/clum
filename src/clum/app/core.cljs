@@ -8,13 +8,18 @@
 
 (defn button
   [x y]
-  [:div.app-button {;;:data-x   x
-                    ;;:data-y   y
-                    :key      (str "button." x "." y)
-                    :on-click (fn [evt]
-                                (ws/send-transit-msg! {:action "button-clicked"
-                                                       :data   {:x x
-                                                                :y y}}))}])
+  (let [tick      (:tick @app-state)
+        btn-class (if (or (= tick x)
+                          (= tick y))
+                    :div.app-button-on
+                    :div.app-button)]
+    [btn-class {;;:data-x   x
+                ;;:data-y   y
+                :key (str "button." x "." y)
+                :on-click  (fn [evt]
+                             (ws/send-transit-msg! {:action "button-clicked"
+                                                    :data   {:x x
+                                                             :y y}}))}]))
 
 (defn message-input
   []
@@ -54,17 +59,19 @@
   (r/render [main-component]
             (.getElementById js/document "app")))
 
-(defn update-messages!
-  [data]
-  (swap! app-state update-in [:activity-log] (fn [activity-log]
-                                               (if (>= (count activity-log) 10)
-                                                 (conj (drop-last activity-log) data)
-                                                 (conj activity-log             data))))
-  (println (:activity-log @app-state)))
+(defn update-app-state-from-socket!
+  [{:strs [message tick] :as data}]
+  (if-not (empty? message)
+    (swap! app-state update-in [:activity-log] (fn [activity-log]
+                                                 (if (>= (count activity-log) 10)
+                                                   (conj (drop-last activity-log) message)
+                                                   (conj activity-log             message))))
+    (swap! app-state update-in [:tick] (fn [_]
+                                         tick))))
 
 (defn main
   []
-  (ws/make-websocket! "ws://localhost:8080/socket" update-messages!)
+  (ws/make-websocket! "ws://localhost:8080/socket" update-app-state-from-socket!)
   (render-app))
 
 (main)

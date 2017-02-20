@@ -1,9 +1,9 @@
 (ns clum.server.core
   (:require [clum.server.midi-interface :as midi]
-            [ring.middleware.transit :as transit-middleware]
-            ;;[cognitect.transit :as transit]
             [org.httpkit.server :as http]
-            [taoensso.timbre    :as log]))
+            [cheshire.core     :as json]
+            [taoensso.timbre    :as log])
+  (:import [java.io ByteArrayInputStream ByteArrayOutputStream]))
 
 (defonce channels (atom #{}))
 
@@ -19,19 +19,29 @@
 
 (defn notify-clients
   [msg]
-  (def msg msg)
-  (let [parsed-msg ()])
-  (doseq [channel @channels]
-    (midi/send-midi! msg)
-    (http/send! channel msg)))
+  (let [serialized (json/generate-string msg)]
+    (doseq [ch @channels]
+      (http/send! ch serialized false))))
 
 (defn handle-socket-request
   [req]
   (log/infof "handle-socket-request: %s" req)
+  (def req req)
   (http/with-channel req channel
     (connect! channel)
+    (swap! channels conj channel)
     (http/on-close channel #(partial disconnect! channel))
-    (http/on-receive channel #(notify-clients %))))
+
+    (loop [tick 0]
+      (when (< tick 8)
+        (log/infof "tick... %s" tick)
+        (notify-clients {:tick tick})
+        (Thread/sleep 500)
+        (recur (inc tick))))
+    
+    ;;(http/on-receive channel #(notify-clients %))
+    (http/on-receive channel (fn [msg]
+                               (def msg msg)))))
 
 (defn app-fn
   [{:keys [uri] :as req}]
@@ -43,9 +53,12 @@
     {:status  404}))
 
 (def app
-  (-> #'app-fn
-      transit-middleware/wrap-transit-body))
+  #'app-fn)
+
+(defn run-app
+  []
+  (http/run-server #'app {:port 8080}))
 
 (comment
-  (http/run-server #'app {:port 8080})
+  (run-app)
   )
