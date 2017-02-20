@@ -7,9 +7,14 @@
 (def app-state (r/atom {}))
 
 (defn button
-  []
-  [:div.app-button {:on-click (fn [evt]
-                                (ws/send-transit-msg! {:action "button-clicked"}))}])
+  [x y]
+  [:div.app-button {;;:data-x   x
+                    ;;:data-y   y
+                    :key      (str "button." x "." y)
+                    :on-click (fn [evt]
+                                (ws/send-transit-msg! {:action "button-clicked"
+                                                       :data   {:x x
+                                                                :y y}}))}])
 
 (defn message-input
   []
@@ -34,9 +39,10 @@
   []
   [:div#container
    [:div#buttons
-    [:div.button-row
-     (button)
-     (button)]]
+    (for [x (range 8)]
+      [:div.button-row {:key x}
+       (for [y (range 8)]
+         (button x y))])]
    [message-input]
    [:div#activity-log
     (map (fn [{:keys [message]}]
