@@ -59164,41 +59164,41 @@ goog.require("clum.app.ws");
 goog.require("reagent.core");
 cljs.core.enable_console_print_BANG_.call(null);
 clum.app.core.app_state = function() {
-  var initial_state = cljs.core.reduce.call(null, function(acc, p__13923) {
-    var vec__13924 = p__13923;
-    var x = cljs.core.nth.call(null, vec__13924, 0, null);
-    var y = cljs.core.nth.call(null, vec__13924, 1, null);
+  var initial_state = cljs.core.reduce.call(null, function(acc, p__14470) {
+    var vec__14471 = p__14470;
+    var x = cljs.core.nth.call(null, vec__14471, 0, null);
+    var y = cljs.core.nth.call(null, vec__14471, 1, null);
     return cljs.core.assoc.call(null, acc, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x, y], null), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "highlighted", "highlighted", 1723498733), false], null));
   }, cljs.core.PersistentArrayMap.EMPTY, function() {
-    var iter__5053__auto__ = function clum$app$core$iter__13925(s__13926) {
+    var iter__5053__auto__ = function clum$app$core$iter__14472(s__14473) {
       return new cljs.core.LazySeq(null, function() {
-        var s__13926__$1 = s__13926;
+        var s__14473__$1 = s__14473;
         while (true) {
-          var temp__4657__auto__ = cljs.core.seq.call(null, s__13926__$1);
+          var temp__4657__auto__ = cljs.core.seq.call(null, s__14473__$1);
           if (temp__4657__auto__) {
             var xs__5205__auto__ = temp__4657__auto__;
             var x = cljs.core.first.call(null, xs__5205__auto__);
-            var iterys__5049__auto__ = function(s__13926__$1, x, xs__5205__auto__, temp__4657__auto__) {
-              return function clum$app$core$iter__13925_$_iter__13927(s__13928) {
-                return new cljs.core.LazySeq(null, function(s__13926__$1, x, xs__5205__auto__, temp__4657__auto__) {
+            var iterys__5049__auto__ = function(s__14473__$1, x, xs__5205__auto__, temp__4657__auto__) {
+              return function clum$app$core$iter__14472_$_iter__14474(s__14475) {
+                return new cljs.core.LazySeq(null, function(s__14473__$1, x, xs__5205__auto__, temp__4657__auto__) {
                   return function() {
-                    var s__13928__$1 = s__13928;
+                    var s__14475__$1 = s__14475;
                     while (true) {
-                      var temp__4657__auto____$1 = cljs.core.seq.call(null, s__13928__$1);
+                      var temp__4657__auto____$1 = cljs.core.seq.call(null, s__14475__$1);
                       if (temp__4657__auto____$1) {
-                        var s__13928__$2 = temp__4657__auto____$1;
-                        if (cljs.core.chunked_seq_QMARK_.call(null, s__13928__$2)) {
-                          var c__5051__auto__ = cljs.core.chunk_first.call(null, s__13928__$2);
+                        var s__14475__$2 = temp__4657__auto____$1;
+                        if (cljs.core.chunked_seq_QMARK_.call(null, s__14475__$2)) {
+                          var c__5051__auto__ = cljs.core.chunk_first.call(null, s__14475__$2);
                           var size__5052__auto__ = cljs.core.count.call(null, c__5051__auto__);
-                          var b__13930 = cljs.core.chunk_buffer.call(null, size__5052__auto__);
+                          var b__14477 = cljs.core.chunk_buffer.call(null, size__5052__auto__);
                           if (function() {
-                            var i__13929 = 0;
+                            var i__14476 = 0;
                             while (true) {
-                              if (i__13929 < size__5052__auto__) {
-                                var y = cljs.core._nth.call(null, c__5051__auto__, i__13929);
-                                cljs.core.chunk_append.call(null, b__13930, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x, y], null));
-                                var G__13931 = i__13929 + 1;
-                                i__13929 = G__13931;
+                              if (i__14476 < size__5052__auto__) {
+                                var y = cljs.core._nth.call(null, c__5051__auto__, i__14476);
+                                cljs.core.chunk_append.call(null, b__14477, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x, y], null));
+                                var G__14478 = i__14476 + 1;
+                                i__14476 = G__14478;
                                 continue;
                               } else {
                                 return true;
@@ -59206,13 +59206,13 @@ clum.app.core.app_state = function() {
                               break;
                             }
                           }()) {
-                            return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__13930), clum$app$core$iter__13925_$_iter__13927.call(null, cljs.core.chunk_rest.call(null, s__13928__$2)));
+                            return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__14477), clum$app$core$iter__14472_$_iter__14474.call(null, cljs.core.chunk_rest.call(null, s__14475__$2)));
                           } else {
-                            return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__13930), null);
+                            return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__14477), null);
                           }
                         } else {
-                          var y = cljs.core.first.call(null, s__13928__$2);
-                          return cljs.core.cons.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x, y], null), clum$app$core$iter__13925_$_iter__13927.call(null, cljs.core.rest.call(null, s__13928__$2)));
+                          var y = cljs.core.first.call(null, s__14475__$2);
+                          return cljs.core.cons.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x, y], null), clum$app$core$iter__14472_$_iter__14474.call(null, cljs.core.rest.call(null, s__14475__$2)));
                         }
                       } else {
                         return null;
@@ -59220,15 +59220,15 @@ clum.app.core.app_state = function() {
                       break;
                     }
                   };
-                }(s__13926__$1, x, xs__5205__auto__, temp__4657__auto__), null, null);
+                }(s__14473__$1, x, xs__5205__auto__, temp__4657__auto__), null, null);
               };
-            }(s__13926__$1, x, xs__5205__auto__, temp__4657__auto__);
+            }(s__14473__$1, x, xs__5205__auto__, temp__4657__auto__);
             var fs__5050__auto__ = cljs.core.seq.call(null, iterys__5049__auto__.call(null, cljs.core.range.call(null, 8)));
             if (fs__5050__auto__) {
-              return cljs.core.concat.call(null, fs__5050__auto__, clum$app$core$iter__13925.call(null, cljs.core.rest.call(null, s__13926__$1)));
+              return cljs.core.concat.call(null, fs__5050__auto__, clum$app$core$iter__14472.call(null, cljs.core.rest.call(null, s__14473__$1)));
             } else {
-              var G__13932 = cljs.core.rest.call(null, s__13926__$1);
-              s__13926__$1 = G__13932;
+              var G__14479 = cljs.core.rest.call(null, s__14473__$1);
+              s__14473__$1 = G__14479;
               continue;
             }
           } else {
@@ -59245,8 +59245,8 @@ clum.app.core.app_state = function() {
 clum.app.core.button = function clum$app$core$button(x, y) {
   var tick = (new cljs.core.Keyword(null, "tick", "tick", -835886976)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, clum.app.core.app_state));
   var highlighted = (new cljs.core.Keyword(null, "highlighted", "highlighted", 1723498733)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, clum.app.core.app_state));
-  var btn_class = cljs.core._EQ_.call(null, highlighted, new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "x", "x", 2099068185), x, new cljs.core.Keyword(null, "y", "y", -1757859776), y], null)) ? new cljs.core.Keyword(null, "div.app-button-highlighted", "div.app-button-highlighted", 307990421) : cljs.core._EQ_.call(null, tick, x) || cljs.core._EQ_.call(null, tick, y) ? new cljs.core.Keyword(null, "div.app-button-on", "div.app-button-on", -386154295) : new cljs.core.Keyword(null, 
-  "div.app-button", "div.app-button", 355286449);
+  var btn_class = cljs.core._EQ_.call(null, highlighted, new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "x", "x", 2099068185), x, new cljs.core.Keyword(null, "y", "y", -1757859776), y], null)) ? new cljs.core.Keyword(null, "div.app-button-highlighted", "div.app-button-highlighted", 307990421) : (new cljs.core.Keyword(null, "highlighted", "highlighted", 1723498733)).cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.call(null, cljs.core.deref.call(null, clum.app.core.app_state), 
+  new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x, y], null))) === true ? new cljs.core.Keyword(null, "div.app-button-highlighted", "div.app-button-highlighted", 307990421) : cljs.core._EQ_.call(null, tick, x) || cljs.core._EQ_.call(null, tick, y) ? new cljs.core.Keyword(null, "div.app-button-on", "div.app-button-on", -386154295) : new cljs.core.Keyword(null, "div.app-button", "div.app-button", 355286449);
   return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [btn_class, new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "key", "key", -1516042587), [cljs.core.str("button."), cljs.core.str(x), cljs.core.str("."), cljs.core.str(y)].join(""), new cljs.core.Keyword(null, "on-click", "on-click", 1632826543), function(tick, highlighted, btn_class) {
     return function(evt) {
       return clum.app.ws.send_transit_msg_BANG_.call(null, new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "action", "action", -811238024), "button-clicked", new cljs.core.Keyword(null, "type", "type", 1174270348), "broadcast", new cljs.core.Keyword(null, "data", "data", -232669377), new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "x", "x", 2099068185), x, new cljs.core.Keyword(null, "y", "y", -1757859776), y], null)], null));
@@ -59259,12 +59259,12 @@ clum.app.core.message_input = function clum$app$core$message_input() {
     return function() {
       return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "input.form-control", "input.form-control", -1123419636), new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null, "type", "type", 1174270348), new cljs.core.Keyword(null, "text", "text", -1790561697), new cljs.core.Keyword(null, "placeholder", "placeholder", -104873083), "type in a message and press enter!", new cljs.core.Keyword(null, "value", "value", 305978217), 
       cljs.core.deref.call(null, value), new cljs.core.Keyword(null, "on-change", "on-change", -732046149), function(value) {
-        return function(p1__13933_SHARP_) {
-          return cljs.core.reset_BANG_.call(null, value, p1__13933_SHARP_.target.value);
+        return function(p1__14480_SHARP_) {
+          return cljs.core.reset_BANG_.call(null, value, p1__14480_SHARP_.target.value);
         };
       }(value), new cljs.core.Keyword(null, "on-key-down", "on-key-down", -1374733765), function(value) {
-        return function(p1__13934_SHARP_) {
-          if (cljs.core._EQ_.call(null, p1__13934_SHARP_.keyCode, 13)) {
+        return function(p1__14481_SHARP_) {
+          if (cljs.core._EQ_.call(null, p1__14481_SHARP_.keyCode, 13)) {
             clum.app.ws.send_transit_msg_BANG_.call(null, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "message", "message", -406056002), cljs.core.deref.call(null, value)], null));
             return cljs.core.reset_BANG_.call(null, value, null);
           } else {
@@ -59287,44 +59287,44 @@ clum.app.core.activity_log_view = function clum$app$core$activity_log_view() {
 };
 clum.app.core.main_component = function clum$app$core$main_component() {
   return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div#container", "div#container", -1257349488), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div#buttons", "div#buttons", -1401601015), function() {
-    var iter__5053__auto__ = function clum$app$core$main_component_$_iter__13957(s__13958) {
+    var iter__5053__auto__ = function clum$app$core$main_component_$_iter__14504(s__14505) {
       return new cljs.core.LazySeq(null, function() {
-        var s__13958__$1 = s__13958;
+        var s__14505__$1 = s__14505;
         while (true) {
-          var temp__4657__auto__ = cljs.core.seq.call(null, s__13958__$1);
+          var temp__4657__auto__ = cljs.core.seq.call(null, s__14505__$1);
           if (temp__4657__auto__) {
-            var s__13958__$2 = temp__4657__auto__;
-            if (cljs.core.chunked_seq_QMARK_.call(null, s__13958__$2)) {
-              var c__5051__auto__ = cljs.core.chunk_first.call(null, s__13958__$2);
+            var s__14505__$2 = temp__4657__auto__;
+            if (cljs.core.chunked_seq_QMARK_.call(null, s__14505__$2)) {
+              var c__5051__auto__ = cljs.core.chunk_first.call(null, s__14505__$2);
               var size__5052__auto__ = cljs.core.count.call(null, c__5051__auto__);
-              var b__13960 = cljs.core.chunk_buffer.call(null, size__5052__auto__);
+              var b__14507 = cljs.core.chunk_buffer.call(null, size__5052__auto__);
               if (function() {
-                var i__13959 = 0;
+                var i__14506 = 0;
                 while (true) {
-                  if (i__13959 < size__5052__auto__) {
-                    var x = cljs.core._nth.call(null, c__5051__auto__, i__13959);
-                    cljs.core.chunk_append.call(null, b__13960, new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div.button-row", "div.button-row", -1099663603), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "key", "key", -1516042587), x], null), function() {
-                      var iter__5053__auto__ = function(i__13959, x, c__5051__auto__, size__5052__auto__, b__13960, s__13958__$2, temp__4657__auto__) {
-                        return function clum$app$core$main_component_$_iter__13957_$_iter__13969(s__13970) {
-                          return new cljs.core.LazySeq(null, function(i__13959, x, c__5051__auto__, size__5052__auto__, b__13960, s__13958__$2, temp__4657__auto__) {
+                  if (i__14506 < size__5052__auto__) {
+                    var x = cljs.core._nth.call(null, c__5051__auto__, i__14506);
+                    cljs.core.chunk_append.call(null, b__14507, new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div.button-row", "div.button-row", -1099663603), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "key", "key", -1516042587), x], null), function() {
+                      var iter__5053__auto__ = function(i__14506, x, c__5051__auto__, size__5052__auto__, b__14507, s__14505__$2, temp__4657__auto__) {
+                        return function clum$app$core$main_component_$_iter__14504_$_iter__14516(s__14517) {
+                          return new cljs.core.LazySeq(null, function(i__14506, x, c__5051__auto__, size__5052__auto__, b__14507, s__14505__$2, temp__4657__auto__) {
                             return function() {
-                              var s__13970__$1 = s__13970;
+                              var s__14517__$1 = s__14517;
                               while (true) {
-                                var temp__4657__auto____$1 = cljs.core.seq.call(null, s__13970__$1);
+                                var temp__4657__auto____$1 = cljs.core.seq.call(null, s__14517__$1);
                                 if (temp__4657__auto____$1) {
-                                  var s__13970__$2 = temp__4657__auto____$1;
-                                  if (cljs.core.chunked_seq_QMARK_.call(null, s__13970__$2)) {
-                                    var c__5051__auto____$1 = cljs.core.chunk_first.call(null, s__13970__$2);
+                                  var s__14517__$2 = temp__4657__auto____$1;
+                                  if (cljs.core.chunked_seq_QMARK_.call(null, s__14517__$2)) {
+                                    var c__5051__auto____$1 = cljs.core.chunk_first.call(null, s__14517__$2);
                                     var size__5052__auto____$1 = cljs.core.count.call(null, c__5051__auto____$1);
-                                    var b__13972 = cljs.core.chunk_buffer.call(null, size__5052__auto____$1);
+                                    var b__14519 = cljs.core.chunk_buffer.call(null, size__5052__auto____$1);
                                     if (function() {
-                                      var i__13971 = 0;
+                                      var i__14518 = 0;
                                       while (true) {
-                                        if (i__13971 < size__5052__auto____$1) {
-                                          var y = cljs.core._nth.call(null, c__5051__auto____$1, i__13971);
-                                          cljs.core.chunk_append.call(null, b__13972, clum.app.core.button.call(null, x, y));
-                                          var G__13979 = i__13971 + 1;
-                                          i__13971 = G__13979;
+                                        if (i__14518 < size__5052__auto____$1) {
+                                          var y = cljs.core._nth.call(null, c__5051__auto____$1, i__14518);
+                                          cljs.core.chunk_append.call(null, b__14519, clum.app.core.button.call(null, x, y));
+                                          var G__14526 = i__14518 + 1;
+                                          i__14518 = G__14526;
                                           continue;
                                         } else {
                                           return true;
@@ -59332,13 +59332,13 @@ clum.app.core.main_component = function clum$app$core$main_component() {
                                         break;
                                       }
                                     }()) {
-                                      return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__13972), clum$app$core$main_component_$_iter__13957_$_iter__13969.call(null, cljs.core.chunk_rest.call(null, s__13970__$2)));
+                                      return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__14519), clum$app$core$main_component_$_iter__14504_$_iter__14516.call(null, cljs.core.chunk_rest.call(null, s__14517__$2)));
                                     } else {
-                                      return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__13972), null);
+                                      return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__14519), null);
                                     }
                                   } else {
-                                    var y = cljs.core.first.call(null, s__13970__$2);
-                                    return cljs.core.cons.call(null, clum.app.core.button.call(null, x, y), clum$app$core$main_component_$_iter__13957_$_iter__13969.call(null, cljs.core.rest.call(null, s__13970__$2)));
+                                    var y = cljs.core.first.call(null, s__14517__$2);
+                                    return cljs.core.cons.call(null, clum.app.core.button.call(null, x, y), clum$app$core$main_component_$_iter__14504_$_iter__14516.call(null, cljs.core.rest.call(null, s__14517__$2)));
                                   }
                                 } else {
                                   return null;
@@ -59346,13 +59346,13 @@ clum.app.core.main_component = function clum$app$core$main_component() {
                                 break;
                               }
                             };
-                          }(i__13959, x, c__5051__auto__, size__5052__auto__, b__13960, s__13958__$2, temp__4657__auto__), null, null);
+                          }(i__14506, x, c__5051__auto__, size__5052__auto__, b__14507, s__14505__$2, temp__4657__auto__), null, null);
                         };
-                      }(i__13959, x, c__5051__auto__, size__5052__auto__, b__13960, s__13958__$2, temp__4657__auto__);
+                      }(i__14506, x, c__5051__auto__, size__5052__auto__, b__14507, s__14505__$2, temp__4657__auto__);
                       return iter__5053__auto__.call(null, cljs.core.range.call(null, 8));
                     }()], null));
-                    var G__13980 = i__13959 + 1;
-                    i__13959 = G__13980;
+                    var G__14527 = i__14506 + 1;
+                    i__14506 = G__14527;
                     continue;
                   } else {
                     return true;
@@ -59360,34 +59360,34 @@ clum.app.core.main_component = function clum$app$core$main_component() {
                   break;
                 }
               }()) {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__13960), clum$app$core$main_component_$_iter__13957.call(null, cljs.core.chunk_rest.call(null, s__13958__$2)));
+                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__14507), clum$app$core$main_component_$_iter__14504.call(null, cljs.core.chunk_rest.call(null, s__14505__$2)));
               } else {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__13960), null);
+                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__14507), null);
               }
             } else {
-              var x = cljs.core.first.call(null, s__13958__$2);
+              var x = cljs.core.first.call(null, s__14505__$2);
               return cljs.core.cons.call(null, new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div.button-row", "div.button-row", -1099663603), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "key", "key", -1516042587), x], null), function() {
-                var iter__5053__auto__ = function(x, s__13958__$2, temp__4657__auto__) {
-                  return function clum$app$core$main_component_$_iter__13957_$_iter__13973(s__13974) {
-                    return new cljs.core.LazySeq(null, function(x, s__13958__$2, temp__4657__auto__) {
+                var iter__5053__auto__ = function(x, s__14505__$2, temp__4657__auto__) {
+                  return function clum$app$core$main_component_$_iter__14504_$_iter__14520(s__14521) {
+                    return new cljs.core.LazySeq(null, function(x, s__14505__$2, temp__4657__auto__) {
                       return function() {
-                        var s__13974__$1 = s__13974;
+                        var s__14521__$1 = s__14521;
                         while (true) {
-                          var temp__4657__auto____$1 = cljs.core.seq.call(null, s__13974__$1);
+                          var temp__4657__auto____$1 = cljs.core.seq.call(null, s__14521__$1);
                           if (temp__4657__auto____$1) {
-                            var s__13974__$2 = temp__4657__auto____$1;
-                            if (cljs.core.chunked_seq_QMARK_.call(null, s__13974__$2)) {
-                              var c__5051__auto__ = cljs.core.chunk_first.call(null, s__13974__$2);
+                            var s__14521__$2 = temp__4657__auto____$1;
+                            if (cljs.core.chunked_seq_QMARK_.call(null, s__14521__$2)) {
+                              var c__5051__auto__ = cljs.core.chunk_first.call(null, s__14521__$2);
                               var size__5052__auto__ = cljs.core.count.call(null, c__5051__auto__);
-                              var b__13976 = cljs.core.chunk_buffer.call(null, size__5052__auto__);
+                              var b__14523 = cljs.core.chunk_buffer.call(null, size__5052__auto__);
                               if (function() {
-                                var i__13975 = 0;
+                                var i__14522 = 0;
                                 while (true) {
-                                  if (i__13975 < size__5052__auto__) {
-                                    var y = cljs.core._nth.call(null, c__5051__auto__, i__13975);
-                                    cljs.core.chunk_append.call(null, b__13976, clum.app.core.button.call(null, x, y));
-                                    var G__13981 = i__13975 + 1;
-                                    i__13975 = G__13981;
+                                  if (i__14522 < size__5052__auto__) {
+                                    var y = cljs.core._nth.call(null, c__5051__auto__, i__14522);
+                                    cljs.core.chunk_append.call(null, b__14523, clum.app.core.button.call(null, x, y));
+                                    var G__14528 = i__14522 + 1;
+                                    i__14522 = G__14528;
                                     continue;
                                   } else {
                                     return true;
@@ -59395,13 +59395,13 @@ clum.app.core.main_component = function clum$app$core$main_component() {
                                   break;
                                 }
                               }()) {
-                                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__13976), clum$app$core$main_component_$_iter__13957_$_iter__13973.call(null, cljs.core.chunk_rest.call(null, s__13974__$2)));
+                                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__14523), clum$app$core$main_component_$_iter__14504_$_iter__14520.call(null, cljs.core.chunk_rest.call(null, s__14521__$2)));
                               } else {
-                                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__13976), null);
+                                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__14523), null);
                               }
                             } else {
-                              var y = cljs.core.first.call(null, s__13974__$2);
-                              return cljs.core.cons.call(null, clum.app.core.button.call(null, x, y), clum$app$core$main_component_$_iter__13957_$_iter__13973.call(null, cljs.core.rest.call(null, s__13974__$2)));
+                              var y = cljs.core.first.call(null, s__14521__$2);
+                              return cljs.core.cons.call(null, clum.app.core.button.call(null, x, y), clum$app$core$main_component_$_iter__14504_$_iter__14520.call(null, cljs.core.rest.call(null, s__14521__$2)));
                             }
                           } else {
                             return null;
@@ -59409,11 +59409,11 @@ clum.app.core.main_component = function clum$app$core$main_component() {
                           break;
                         }
                       };
-                    }(x, s__13958__$2, temp__4657__auto__), null, null);
+                    }(x, s__14505__$2, temp__4657__auto__), null, null);
                   };
-                }(x, s__13958__$2, temp__4657__auto__);
+                }(x, s__14505__$2, temp__4657__auto__);
                 return iter__5053__auto__.call(null, cljs.core.range.call(null, 8));
-              }()], null), clum$app$core$main_component_$_iter__13957.call(null, cljs.core.rest.call(null, s__13958__$2)));
+              }()], null), clum$app$core$main_component_$_iter__14504.call(null, cljs.core.rest.call(null, s__14505__$2)));
             }
           } else {
             return null;
@@ -59423,34 +59423,34 @@ clum.app.core.main_component = function clum$app$core$main_component() {
       }, null, null);
     };
     return iter__5053__auto__.call(null, cljs.core.range.call(null, 8));
-  }()], null), new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [clum.app.core.message_input], null), new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [clum.app.core.anim_button], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div#activity-log", "div#activity-log", -929667729), cljs.core.map.call(null, function(p__13977) {
-    var map__13978 = p__13977;
-    var map__13978__$1 = cljs.core.seq_QMARK_.call(null, map__13978) ? cljs.core.apply.call(null, cljs.core.hash_map, map__13978) : map__13978;
-    var message = cljs.core.get.call(null, map__13978__$1, new cljs.core.Keyword(null, "message", "message", -406056002));
+  }()], null), new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [clum.app.core.message_input], null), new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [clum.app.core.anim_button], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "div#activity-log", "div#activity-log", -929667729), cljs.core.map.call(null, function(p__14524) {
+    var map__14525 = p__14524;
+    var map__14525__$1 = cljs.core.seq_QMARK_.call(null, map__14525) ? cljs.core.apply.call(null, cljs.core.hash_map, map__14525) : map__14525;
+    var message = cljs.core.get.call(null, map__14525__$1, new cljs.core.Keyword(null, "message", "message", -406056002));
     return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "p", "p", 151049309), message], null);
   }, (new cljs.core.Keyword(null, "activity-log", "activity-log", 933554034)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, clum.app.core.app_state)))], null)], null);
 };
 clum.app.core.render_app = function clum$app$core$render_app() {
   return reagent.core.render.call(null, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [clum.app.core.main_component], null), document.getElementById("app"));
 };
-clum.app.core.update_app_state_from_socket_BANG_ = function clum$app$core$update_app_state_from_socket_BANG_(p__13982) {
-  var map__13985 = p__13982;
-  var map__13985__$1 = cljs.core.seq_QMARK_.call(null, map__13985) ? cljs.core.apply.call(null, cljs.core.hash_map, map__13985) : map__13985;
-  var data = map__13985__$1;
-  var message = cljs.core.get.call(null, map__13985__$1, "message");
-  var tick = cljs.core.get.call(null, map__13985__$1, "tick");
-  var highlighted = cljs.core.get.call(null, map__13985__$1, "highlighted");
+clum.app.core.update_app_state_from_socket_BANG_ = function clum$app$core$update_app_state_from_socket_BANG_(p__14529) {
+  var map__14532 = p__14529;
+  var map__14532__$1 = cljs.core.seq_QMARK_.call(null, map__14532) ? cljs.core.apply.call(null, cljs.core.hash_map, map__14532) : map__14532;
+  var data = map__14532__$1;
+  var message = cljs.core.get.call(null, map__14532__$1, "message");
+  var tick = cljs.core.get.call(null, map__14532__$1, "tick");
+  var highlighted = cljs.core.get.call(null, map__14532__$1, "highlighted");
   if (tick == null) {
   } else {
-    cljs.core.swap_BANG_.call(null, clum.app.core.app_state, cljs.core.update_in, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "tick", "tick", -835886976)], null), function(map__13985, map__13985__$1, data, message, tick, highlighted) {
+    cljs.core.swap_BANG_.call(null, clum.app.core.app_state, cljs.core.update_in, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "tick", "tick", -835886976)], null), function(map__14532, map__14532__$1, data, message, tick, highlighted) {
       return function(_) {
         return tick;
       };
-    }(map__13985, map__13985__$1, data, message, tick, highlighted));
+    }(map__14532, map__14532__$1, data, message, tick, highlighted));
   }
   if (message == null) {
   } else {
-    cljs.core.swap_BANG_.call(null, clum.app.core.app_state, cljs.core.update_in, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "activity-log", "activity-log", 933554034)], null), function(map__13985, map__13985__$1, data, message, tick, highlighted) {
+    cljs.core.swap_BANG_.call(null, clum.app.core.app_state, cljs.core.update_in, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "activity-log", "activity-log", 933554034)], null), function(map__14532, map__14532__$1, data, message, tick, highlighted) {
       return function(activity_log) {
         if (cljs.core.count.call(null, activity_log) >= 10) {
           return cljs.core.conj.call(null, cljs.core.drop_last.call(null, activity_log), message);
@@ -59458,20 +59458,21 @@ clum.app.core.update_app_state_from_socket_BANG_ = function clum$app$core$update
           return cljs.core.conj.call(null, activity_log, message);
         }
       };
-    }(map__13985, map__13985__$1, data, message, tick, highlighted));
+    }(map__14532, map__14532__$1, data, message, tick, highlighted));
   }
   if (highlighted == null) {
     return null;
   } else {
-    var map__13986 = highlighted;
-    var map__13986__$1 = cljs.core.seq_QMARK_.call(null, map__13986) ? cljs.core.apply.call(null, cljs.core.hash_map, map__13986) : map__13986;
-    var x = cljs.core.get.call(null, map__13986__$1, "x");
-    var y = cljs.core.get.call(null, map__13986__$1, "y");
-    return cljs.core.swap_BANG_.call(null, clum.app.core.app_state, cljs.core.update_in, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "highlighted", "highlighted", 1723498733)], null), function(map__13986, map__13986__$1, x, y, map__13985, map__13985__$1, data, message, tick, highlighted) {
+    var map__14533 = highlighted;
+    var map__14533__$1 = cljs.core.seq_QMARK_.call(null, map__14533) ? cljs.core.apply.call(null, cljs.core.hash_map, map__14533) : map__14533;
+    var x = cljs.core.get.call(null, map__14533__$1, "x");
+    var y = cljs.core.get.call(null, map__14533__$1, "y");
+    var new_app_state = cljs.core.update_in.call(null, cljs.core.update_in.call(null, cljs.core.deref.call(null, clum.app.core.app_state), new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "highlighted", "highlighted", 1723498733)], null), function(map__14533, map__14533__$1, x, y, map__14532, map__14532__$1, data, message, tick, highlighted) {
       return function(_) {
         return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "x", "x", 2099068185), x, new cljs.core.Keyword(null, "y", "y", -1757859776), y], null);
       };
-    }(map__13986, map__13986__$1, x, y, map__13985, map__13985__$1, data, message, tick, highlighted));
+    }(map__14533, map__14533__$1, x, y, map__14532, map__14532__$1, data, message, tick, highlighted)), new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [x, y, new cljs.core.Keyword(null, "highlighted", "highlighted", 1723498733)], null), cljs.core.not);
+    return cljs.core.reset_BANG_.call(null, clum.app.core.app_state, new_app_state);
   }
 };
 clum.app.core.main = function clum$app$core$main() {

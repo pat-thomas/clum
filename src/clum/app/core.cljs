@@ -20,6 +20,12 @@
         btn-class   (cond (= highlighted
                              {:x x :y y})
                           :div.app-button-highlighted
+
+                          (true? (-> app-state
+                                     deref
+                                     (get-in [x y])
+                                     :highlighted))
+                          :div.app-button-highlighted
                           
                           (or (= tick x)
                               (= tick y))
@@ -93,8 +99,12 @@
 
   (when-not (nil? highlighted)
     (let [{:strs [x y]} highlighted]
-      (swap! app-state update-in [:highlighted] (fn [_]
-                                                  {:x x :y y})))))
+      (let [new-app-state (-> app-state
+                              deref
+                              (update-in [:highlighted] (fn [_]
+                                                          {:x x :y y}))
+                              (update-in [x y :highlighted] not))]
+        (reset! app-state new-app-state)))))
 
 (defn main
   []
