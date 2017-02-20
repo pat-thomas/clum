@@ -24,7 +24,7 @@
       (http/send! ch serialized false))))
 
 (defn play-animation
-  []
+  [_]
   (loop [tick 0]
     (when (< tick 8)
       (log/infof "tick... %s" tick)
@@ -32,12 +32,19 @@
       (Thread/sleep 500)
       (recur (inc tick)))))
 
+(defn button-clicked
+  [payload]
+  (notify-clients {:highlighted (:data payload)}))
+
+(def action-dispatch
+  {"play-animation" #'play-animation
+   "button-clicked" #'button-clicked})
+
 (defn respond-msg
   [msg]
   (let [{:keys [action] :as parsed} (json/parse-string msg true)]
-    (if (= action "play-animation")
-      (play-animation)
-      (notify-clients {:highlighted (:data parsed)}))))
+    (when-let [handler-fn (get action-dispatch action)]
+      (handler-fn parsed))))
 
 (defn handle-socket-request
   [req]
