@@ -3,7 +3,6 @@
 
 (defonce ws-chan (atom nil))
 (def json-reader (t/reader :json))
-(def json-writer (t/writer :json))
 
 (defn receive-transit-msg!
   [update-fn]
