@@ -36,6 +36,15 @@
     :value    "Play animation"
     :on-click #(ws/send-transit-msg! {:action "play-animation"})}])
 
+(defn app-debugger
+  [state]
+  [:table
+   [:thead>tr
+    [:th "Tick"]]
+   [:tbody
+    [:tr
+     [:td (:tick @state)]]]])
+
 (defn main-component
   [state]
   [:div#container
@@ -45,6 +54,7 @@
        (for [y (range 8)]
          (button state x y))])]
    [anim-button]
+   [#(app-debugger state)]
    [:div#activity-log
     (map (fn [{:keys [message]}]
            [:p message])

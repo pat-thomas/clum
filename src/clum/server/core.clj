@@ -1,5 +1,5 @@
 (ns clum.server.core
-  (:require [clum.server.midi-interface :as midi]
+  (:require ;;[clum.server.midi-interface :as midi]
             [org.httpkit.server :as http]
             [cheshire.core     :as json]
             [taoensso.timbre    :as log])
@@ -46,12 +46,21 @@
     (when-let [handler-fn (get action-dispatch action)]
       (handler-fn parsed))))
 
+(def connected-clients (atom #{}))
+
 (defn handle-socket-request
   [req]
   (log/infof "handle-socket-request: %s" req)
   (http/with-channel req channel
     (connect! channel)
     (swap! channels conj channel)
+    (Thread.
+     (loop [tick 0]
+       (notify-clients {:tick tick})
+       (Thread/sleep 250)
+       (recur (if (>= tick 8)
+                0
+                (inc tick)))))
     (http/on-close channel #(partial disconnect! channel))
     (http/on-receive channel (fn [msg]
                                (respond-msg msg)))))
