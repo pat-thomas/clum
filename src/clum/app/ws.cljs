@@ -13,6 +13,26 @@
   [thing]
   (.stringify js/JSON (clj->js thing)))
 
+(defn update-app-state-from-socket!
+  [state {:strs [message tick highlighted] :as data}]
+  (when-not (nil? tick)
+    (swap! state update-in [:tick] (fn [_]
+                                         tick)))
+  (when-not (nil? message)
+    (swap! state update-in [:activity-log] (fn [activity-log]
+                                                 (if (>= (count activity-log) 10)
+                                                   (conj (drop-last activity-log) message)
+                                                   (conj activity-log             message)))))
+
+  (when-not (nil? highlighted)
+    (let [{:strs [x y]} highlighted]
+      (let [new-app-state (-> state
+                              deref
+                              (update-in [:highlighted] (fn [_]
+                                                          {:x x :y y}))
+                              (update-in [x y :highlighted] not))]
+        (reset! state new-app-state)))))
+
 (defn send-transit-msg!
   [msg]
   (if @ws-chan
