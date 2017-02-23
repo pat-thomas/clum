@@ -1,7 +1,6 @@
 (ns clum.server.core
-  (:require ;;[clum.server.midi-interface :as midi]
-            [org.httpkit.server :as http]
-            [cheshire.core     :as json]
+  (:require [org.httpkit.server :as http]
+            [cheshire.core      :as json]
             [taoensso.timbre    :as log])
   (:import [java.io ByteArrayInputStream ByteArrayOutputStream]))
 
@@ -58,7 +57,7 @@
      (loop [tick 0]
        (notify-clients {:tick tick})
        (Thread/sleep 250)
-       (recur (if (>= tick 8)
+       (recur (if (>= tick 7)
                 0
                 (inc tick)))))
     (http/on-close channel #(partial disconnect! channel))
