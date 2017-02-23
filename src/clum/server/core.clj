@@ -5,6 +5,7 @@
   (:import [java.io ByteArrayInputStream ByteArrayOutputStream]))
 
 (defonce channels (atom #{}))
+(defonce connected-clients (atom #{}))
 
 (defn connect!
   [channel]
@@ -12,8 +13,9 @@
   (swap! channels conj channel))
 
 (defn disconnect!
-  [channel status]
+  [{:strs [origin] :as req} channel status]
   (log/infof "channel closed: %s" status)
+  (swap! connected-clients #(remove #{origin} %))
   (swap! channels #(remove #{channel} %)))
 
 (defn notify-clients
@@ -45,24 +47,32 @@
     (when-let [handler-fn (get action-dispatch action)]
       (handler-fn parsed))))
 
-(def connected-clients (atom #{}))
+(defn running?
+  [origin]
+  (not (nil? (get @connected-clients origin))))
 
 (defn handle-socket-request
-  [req]
-  (log/infof "handle-socket-request: %s" req)
-  (http/with-channel req channel
-    (connect! channel)
-    (swap! channels conj channel)
-    (Thread.
-     (loop [tick 0]
-       (notify-clients {:tick tick})
-       (Thread/sleep 250)
-       (recur (if (>= tick 7)
-                0
-                (inc tick)))))
-    (http/on-close channel #(partial disconnect! channel))
-    (http/on-receive channel (fn [msg]
-                               (respond-msg msg)))))
+  [{:keys [headers] :as req}]
+  (let [{:strs [origin]} headers]
+    (log/infof "handle-socket-request: %s" req)
+    (http/with-channel req channel
+      (connect! channel)
+      (swap! channels conj channel)
+      (if (running? origin)
+        (log/infof "Client already connected, not spinning up new thread: %s" origin)
+        (do
+          (swap! connected-clients conj origin)
+          (log/infof "Client NOT connected, spinning up new thread: %s" origin)
+          (Thread.
+           (loop [tick 0]
+             (notify-clients {:tick tick})
+             (Thread/sleep 250)
+             (recur (if (>= tick 7)
+                      0
+                      (inc tick)))))))
+      (http/on-close channel #(partial disconnect! req channel))
+      (http/on-receive channel (fn [msg]
+                                 (respond-msg msg))))))
 
 (defn app-fn
   [{:keys [uri] :as req}]
