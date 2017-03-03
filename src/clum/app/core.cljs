@@ -14,8 +14,16 @@
 
 (defn main
   [state]
-  (ws/make-websocket! "ws://localhost:8080/socket" (partial ws/update-app-state-from-socket! state))
+  (if-not (:connected? @state)
+    (do
+      (println "not connected to websocket, connecting...")
+      (ws/make-websocket! "ws://localhost:8080/socket" (partial ws/update-app-state-from-socket! state))
+      (swap! state assoc :connected? true))
+    (println "already connected to websocket, not reconnecting"))
   (render-app state))
 
+(defn on-js-reload
+  []
+  (println "reloaded..."))
 
 (main state/app-state)
