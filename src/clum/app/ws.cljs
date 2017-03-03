@@ -25,12 +25,13 @@
                                                    (conj activity-log             message)))))
 
   (when-not (nil? highlighted)
-    (let [{:strs [x y]} highlighted]
+    (let [{:strs [x y]}  highlighted
+          coordinate-map {:x x
+                          :y y}]
       (let [new-app-state (-> state
                               deref
-                              (update-in [:highlighted] (fn [_]
-                                                          {:x x :y y}))
-                              (update-in [x y :highlighted] not))]
+                              (update-in [x y :highlighted] not)
+                              (update-in [:highlighted-set] conj coordinate-map))]
         (reset! state new-app-state)))))
 
 (defn send-transit-msg!

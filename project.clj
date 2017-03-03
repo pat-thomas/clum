@@ -19,5 +19,7 @@
                  [cheshire                  "5.7.0"]
 
                  ;; client-side
+                 [org.clojure/clojurescript  "1.9.494"]
                  [reagent                    "0.6.0"]
+                 [cljs-bach                  "0.2.0"]
                  [com.cognitect/transit-cljs "0.8.239"]])
