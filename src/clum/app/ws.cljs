@@ -1,5 +1,6 @@
 (ns clum.app.ws
-  (:require [cognitect.transit :as t]))
+  (:require [clum.app.audio    :as audio]
+            [cognitect.transit :as t]))
 
 (defonce ws-chan (atom nil))
 (def json-reader (t/reader :json))
@@ -15,24 +16,28 @@
 
 (defn update-app-state-from-socket!
   [state {:strs [message tick highlighted] :as data}]
-  (when-not (nil? tick)
-    (swap! state update-in [:tick] (fn [_]
-                                         tick)))
-  (when-not (nil? message)
-    (swap! state update-in [:activity-log] (fn [activity-log]
-                                                 (if (>= (count activity-log) 10)
-                                                   (conj (drop-last activity-log) message)
-                                                   (conj activity-log             message)))))
-
-  (when-not (nil? highlighted)
-    (let [{:strs [x y]}  highlighted
-          coordinate-map {:x x
-                          :y y}]
-      (let [new-app-state (-> state
-                              deref
-                              (update-in [x y :highlighted] not)
-                              (update-in [:highlighted-set] conj coordinate-map))]
-        (reset! state new-app-state)))))
+  (let [old-app-state @state
+        new-app-state old-app-state
+        new-app-state (if-not (nil? tick)
+                        (update-in new-app-state [:tick] (fn [_]
+                                                           tick))
+                        new-app-state)
+        new-app-state (if-not (nil? message)
+                        (update-in new-app-state [:activity-log] (fn [activity-log]
+                                                                   (if (>= (count activity-log) 10)
+                                                                     (conj (drop-last activity-log) message)
+                                                                     (conj activity-log             message))))
+                        new-app-state)
+        new-app-state (if-not (nil? highlighted)
+                        (let [{:strs [x y]}  highlighted
+                              coordinate-map {:x x
+                                              :y y}]
+                          (-> new-app-state
+                              (update-in [x y :highlighted?] not)
+                              (update-in [:highlighted-set] conj coordinate-map)))
+                        new-app-state)]
+    (audio/run-actions-for-tick tick new-app-state)
+    (reset! state new-app-state)))
 
 (defn send-transit-msg!
   [msg]

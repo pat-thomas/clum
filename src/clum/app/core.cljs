@@ -17,7 +17,7 @@
   (if-not (:connected? @state)
     (do
       (println "not connected to websocket, connecting...")
-      (ws/make-websocket! "ws://localhost:8080/socket" (partial ws/update-app-state-from-socket! state))
+      (ws/make-websocket! "ws://localhost:8080/socket" (partial #'ws/update-app-state-from-socket! state))
       (swap! state assoc :connected? true))
     (println "already connected to websocket, not reconnecting"))
   (render-app state))

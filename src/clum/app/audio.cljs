@@ -48,3 +48,32 @@
   (-> (create-sine x y)
       (syn/connect-> syn/destination)
       (syn/run-with context (syn/current-time context) 1.0)))
+
+(def action-dispatch
+  {0 (fn [i tick]
+       (println "wooooo" [i tick]))
+   1 (fn [i tick]
+       (println "weeeee" [i tick]))
+   2 (fn [i tick]
+       (println "heyyyy" [i tick]))
+   3 (fn [i tick]
+       (println "watttt" [i tick]))
+   4 (fn [i tick]
+       (println "uppppp" [i tick]))
+   5 (fn [i tick]
+       (println "itssss" [i tick]))
+   6 (fn [i tick]
+       (println "meeeee" [i tick]))
+   7 (fn [i tick]
+       (println "patttt" [i tick]))})
+
+(defn run-actions-for-tick
+  [tick state]
+  (when tick
+    (doseq [i (range 8)]
+      (let [highlighted? (-> state
+                (get-in [i tick])
+                :highlighted?
+                true?)]
+        (when-let [action-fn (and highlighted? (get action-dispatch i))]
+          (action-fn i tick))))))
