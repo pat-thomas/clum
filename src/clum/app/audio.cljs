@@ -72,8 +72,9 @@
   (when tick
     (doseq [i (range 8)]
       (let [highlighted? (-> state
-                (get-in [i tick])
-                :highlighted?
-                true?)]
-        (when-let [action-fn (and highlighted? (get action-dispatch i))]
+                             (get-in [i tick])
+                             :highlighted?
+                             true?)]
+        (when-let [action-fn (and highlighted?
+                                  (get action-dispatch i))]
           (action-fn i tick))))))
