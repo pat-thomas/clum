@@ -8,26 +8,26 @@
   background: #000;
   margin: 10px;
   float: left;
-  transition: background-color 0.2s, border-radius 1s;
+  transition: background-color 0.4s, border-radius 0.1s;
 }
 
 .app-button-highlighted {
   width: 50px;
   height: 50px;
-  background: #888;
-  border-radius: 10px;
+  background: #ccc;
+  border-radius: 20px;
   margin: 10px;
   float: left;
-  transition: background-color 0.2s, border-radius 1s;
+  transition: background-color 0.4s, border-radius 0.1s;
 }
 
 .app-button-on {
   width: 50px;
   height: 50px;
-  background: #ddd;
+  background: #777;
   margin: 10px;
   float: left;
-  transition: background-color 0.2s, border-radius 1s;
+  transition: background-color 0.1s, border-radius 0.1s;
 }
 
 .app-button:hover {

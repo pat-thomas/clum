@@ -5,16 +5,20 @@
 
 (defn button
   [x y state]
-  (let [component-state             (r/atom {:sound-playing? false})
-        {:keys [highlighted? tick]} @state
-        btn-class                   (cond highlighted?
-                                          :div.app-button-highlighted
+  (let [component-state              (r/atom {:sound-playing? false})
+        {:keys [tick] :as state-val} @state
+        highlighted?                 (-> state-val
+                                         (get-in [x y])
+                                         :highlighted?
+                                         true?)
+        btn-class                    (cond highlighted?
+                                           :div.app-button-highlighted
 
-                                          (= tick y)
-                                          :div.app-button-on
+                                           (= tick y)
+                                           :div.app-button-on
 
-                                          :else
-                                          :div.app-button)]
+                                           :else
+                                           :div.app-button)]
     [btn-class {:key      (str "button." x "." y)
                 :on-click (fn [evt]
                             ;;(println "doing the thing with the stuff...")
