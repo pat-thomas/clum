@@ -5,8 +5,7 @@
 
 (defn button
   [x y state]
-  (let [component-state              (r/atom {:sound-playing? false})
-        {:keys [tick] :as state-val} @state
+  (let [{:keys [tick] :as state-val} @state
         highlighted?                 (-> state-val
                                          (get-in [x y])
                                          :highlighted?
@@ -21,9 +20,6 @@
                                            :div.app-button)]
     [btn-class {:key      (str "button." x "." y)
                 :on-click (fn [evt]
-                            ;;(println "doing the thing with the stuff...")
-                            ;;(audio/play-sine x y)
-                            ;;(swap! component-state update-in [:sound-playing?] not)
                             (ws/send-transit-msg! {:action "button-clicked"
                                                    :type   "broadcast"
                                                    :data   {:x x
