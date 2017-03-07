@@ -33,3 +33,9 @@
 .app-button:hover {
   cursor: pointer;
 }
+.app-button-highlighted:hover {
+  cursor: pointer;
+}
+.app-button-on {
+  cursor: pointer;
+}
