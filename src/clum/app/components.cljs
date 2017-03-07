@@ -56,8 +56,8 @@
           (doall
            (for [y (range 8)]
              (button x y state)))]))]
-     [anim-button]
-     [#(app-debugger state)]
+     ;;[anim-button]
+     ;;[#(app-debugger state)]
      [:div#activity-log
       (map (fn [{:keys [message]}]
              [:p message])
