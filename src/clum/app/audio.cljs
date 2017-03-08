@@ -51,7 +51,8 @@
 
 (def action-dispatch
   {0 (fn [i tick]
-       (println "wooooo" [i tick]))
+       (println "wooooo" [i tick])
+       (play-sine i tick))
    1 (fn [i tick]
        (println "weeeee" [i tick]))
    2 (fn [i tick]
