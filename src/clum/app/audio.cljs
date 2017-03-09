@@ -1,7 +1,7 @@
 (ns clum.app.audio
   (:require [cljs-bach.synthesis :as syn]))
 
-(def context (syn/audio-context))
+(defonce context (syn/audio-context))
 
 (def frequency-dispatch
   {0 440
@@ -31,42 +31,36 @@
 (defn ->volume
   [y x]
   (let [volume (get volume-dispatch y)]
-    (println "volume:" volume)
+    (println "volume" volume)
     y))
 
-(defn create-sine
-  [x y]
-  (let [frequency (->frequency y x)
-        volume    (->volume y x)]
-    (syn/connect->
-     (syn/sine frequency)
-     (syn/percussive 0.01 0.4)
-     (syn/gain volume))))
+(defn play-synth
+  [synth x y]
+  (let [frequency     (->frequency y x)
+        volume        (->volume y x)
+        created-synth (syn/connect->
+                       (synth frequency)
+                       (syn/adsr 0.3 0.2 0.01 0.005)
+                       ;;(syn/low-pass 1000)
+                       (syn/gain volume))]
+    (-> created-synth
+        (syn/connect-> syn/destination)
+        (syn/run-with context (syn/current-time context) 1.0))))
 
-(defn play-sine
-  [x y]
-  (-> (create-sine x y)
-      (syn/connect-> syn/destination)
-      (syn/run-with context (syn/current-time context) 1.0)))
+(def synth-dispatch
+  {0 syn/sine
+   1 syn/triangle
+   2 syn/square
+   3 syn/sine
+   4 syn/triangle
+   5 syn/square
+   6 syn/sawtooth
+   7 syn/triangle})
 
-(def action-dispatch
-  {0 (fn [i tick]
-       (println "wooooo" [i tick])
-       (play-sine i tick))
-   1 (fn [i tick]
-       (println "weeeee" [i tick]))
-   2 (fn [i tick]
-       (println "heyyyy" [i tick]))
-   3 (fn [i tick]
-       (println "watttt" [i tick]))
-   4 (fn [i tick]
-       (println "uppppp" [i tick]))
-   5 (fn [i tick]
-       (println "itssss" [i tick]))
-   6 (fn [i tick]
-       (println "meeeee" [i tick]))
-   7 (fn [i tick]
-       (println "patttt" [i tick]))})
+(defn dispatch-action
+  [i tick]
+  (let [synth-fn (get synth-dispatch i)]
+    #(play-synth synth-fn i tick)))
 
 (defn run-actions-for-tick
   [tick state]
@@ -77,5 +71,5 @@
                              :highlighted?
                              true?)]
         (when-let [action-fn (and highlighted?
-                                  (get action-dispatch i))]
+                                  (dispatch-action i tick))]
           (action-fn i tick))))))

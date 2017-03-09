@@ -66,7 +66,7 @@
           (Thread.
            (loop [tick 0]
              (notify-clients {:tick tick})
-             (Thread/sleep 250)
+             (Thread/sleep 200)
              (recur (if (>= tick 7)
                       0
                       (inc tick)))))))
