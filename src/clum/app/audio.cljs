@@ -40,8 +40,8 @@
         volume        (->volume y x)
         created-synth (syn/connect->
                        (synth frequency)
-                       (syn/adsr 0.3 0.2 0.01 0.005)
-                       ;;(syn/low-pass 1000)
+                       (syn/percussive 0.01 0.25)
+                       (syn/low-pass 500)
                        (syn/gain volume))]
     (-> created-synth
         (syn/connect-> syn/destination)
