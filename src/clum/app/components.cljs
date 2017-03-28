@@ -32,6 +32,12 @@
     :value    "Play animation"
     :on-click #(ws/send-transit-msg! {:action "play-animation"})}])
 
+(defn broadcast-button
+  "Creates a button that will send a group of changes to the
+   server to be broadcasted to all (or some) connected clients."
+  []
+  :implement-me)
+
 (defn app-debugger
   [state]
   [:table
@@ -41,6 +47,13 @@
     [:tr
      [:td (:tick @state)]]]])
 
+(defn button-row
+  [state x]
+  [:div.button-row {:key x}
+   (doall
+    (for [y (range 8)]
+      (button x y state)))])
+
 (defn main-component
   [state]
   (let [{:keys [tick activity-log] :as state-value} @state]
@@ -48,10 +61,7 @@
      [:div#buttons
       (doall
        (for [x (range 8)]
-         [:div.button-row {:key x}
-          (doall
-           (for [y (range 8)]
-             (button x y state)))]))]
+         (button-row state x)))]
      ;;[anim-button]
      ;;[#(app-debugger state)]
      [:div#activity-log
