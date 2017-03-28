@@ -13,10 +13,25 @@
    6 440
    7 880})
 
+(defn double-frequency
+  [freq]
+  (* freq 2.0))
+
+(defn halve-frequency
+  [freq]
+  (/ freq 2.0))
+
 (defn ->frequency
-  [y x]
+  [y x measure]
   (let [freq (get frequency-dispatch x)]
-    freq))
+    (condp = measure
+      0 freq
+      1 (double-frequency freq)
+      2 (let [halved   (halve-frequency freq)
+              modifier (rand-nth [#(* % 1.5) identity])]
+          (modifier halved))
+      3 (let [modifier (rand-nth [double-frequency halve-frequency])]
+          (modifier freq)))))
 
 (def volume-dispatch
   {0 0.5
@@ -35,8 +50,8 @@
     y))
 
 (defn play-synth
-  [synth x y]
-  (let [frequency     (->frequency y x)
+  [synth x y measure]
+  (let [frequency     (->frequency y x measure)
         volume        (->volume y x)
         created-synth (syn/connect->
                        (synth frequency)
@@ -58,12 +73,14 @@
    7 syn/triangle})
 
 (defn dispatch-action
-  [i tick]
+  [i tick measure]
+  (println measure)
   (let [synth-fn (get synth-dispatch i)]
-    #(play-synth synth-fn i tick)))
+    #(play-synth synth-fn i tick measure)))
 
 (defn run-actions-for-tick
-  [tick state]
+  [tick measure state]
+  (println "measure" measure)
   (when tick
     (doseq [i (range 8)]
       (let [highlighted? (-> state
@@ -71,5 +88,5 @@
                              :highlighted?
                              true?)]
         (when-let [action-fn (and highlighted?
-                                  (dispatch-action i tick))]
+                                  (dispatch-action i tick measure))]
           (action-fn i tick))))))

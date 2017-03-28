@@ -64,12 +64,26 @@
           (swap! connected-clients conj origin)
           (log/infof "Client NOT connected, spinning up new thread: %s" origin)
           (Thread.
-           (loop [tick 0]
-             (notify-clients {:tick tick})
+           (loop [tick    0
+                  measure 0]
+             (log/infof "tick => %s, measure %s" tick measure)
+             (notify-clients {:tick    tick
+                              :measure measure})
              (Thread/sleep 200)
-             (recur (if (>= tick 7)
-                      0
-                      (inc tick)))))))
+             (let [new-tick    (if (>= tick 7)
+                                 0
+                                 (inc tick))
+                   new-measure (cond (and (>= tick 7)
+                                          (>= measure 3))
+
+                                     0
+
+                                     (>= tick 7)
+                                     (inc measure)
+
+                                     :else
+                                     measure)]
+               (recur new-tick new-measure))))))
       (http/on-close channel #(partial disconnect! req channel))
       (http/on-receive channel (fn [msg]
                                  (respond-msg msg))))))

@@ -15,12 +15,16 @@
   (.stringify js/JSON (clj->js thing)))
 
 (defn update-app-state-from-socket!
-  [state {:strs [message tick highlighted] :as data}]
+  [state {:strs [message tick measure highlighted] :as data}]
   (let [old-app-state @state
         new-app-state old-app-state
         new-app-state (if-not (nil? tick)
                         (update-in new-app-state [:tick] (fn [_]
                                                            tick))
+                        new-app-state)
+        new-app-state (if-not (nil? measure)
+                        (update-in new-app-state [:measure] (fn [_]
+                                                              measure))
                         new-app-state)
         new-app-state (if-not (nil? message)
                         (update-in new-app-state [:activity-log] (fn [activity-log]
@@ -36,7 +40,7 @@
                               (update-in [x y :highlighted?] not)
                               (update-in [:highlighted-set] conj coordinate-map)))
                         new-app-state)]
-    (audio/run-actions-for-tick tick new-app-state)
+    (audio/run-actions-for-tick tick measure new-app-state)
     (reset! state new-app-state)))
 
 (defn send-transit-msg!
